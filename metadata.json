@@ -1,0 +1,6 @@
+{
+  "name": "PlayStation Heaven",
+  "description": "Sistem manajemen rental PlayStation dengan fitur timer real-time, POS (penjualan snack), laporan keuangan, dan manajemen kasir.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

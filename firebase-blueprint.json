@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "User": {
+      "title": "Kasir",
+      "description": "Profil kasir atau admin",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "nama": { "type": "string" },
+        "username": { "type": "string" },
+        "alamat": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "kasir"] },
+        "avatar": { "type": "string" }
+      },
+      "required": ["uid", "nama", "username", "role"]
+    },
+    "Product": {
+      "title": "Produk",
+      "description": "Produk warung (makanan/minuman)",
+      "type": "object",
+      "properties": {
+        "nama": { "type": "string" },
+        "harga": { "type": "number" },
+        "kategori": { "type": "string", "enum": ["Makanan", "Minuman", "Snack", "Lainnya"] },
+        "emoji": { "type": "string" },
+        "stok": { "type": "number" }
+      },
+      "required": ["nama", "harga", "kategori"]
+    },
+    "Transaction": {
+      "title": "Transaksi",
+      "description": "Catatan transaksi rental dan POS",
+      "type": "object",
+      "properties": {
+        "deskripsi": { "type": "string" },
+        "total": { "type": "number" },
+        "metodePembayaran": { "type": "string", "enum": ["Cash", "Transfer"] },
+        "tanggal": { "type": "string", "format": "date-time" },
+        "kasirId": { "type": "string" },
+        "items": { "type": "array" }
+      },
+      "required": ["total", "metodePembayaran", "tanggal", "kasirId"]
+    },
+    "Finance": {
+      "title": "Keuangan",
+      "description": "Catatan pemasukan/pengeluaran tambahan",
+      "type": "object",
+      "properties": {
+        "tipe": { "type": "string", "enum": ["pemasukan", "pengeluaran"] },
+        "keterangan": { "type": "string" },
+        "nominal": { "type": "number" },
+        "tanggal": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tipe", "nominal", "tanggal"]
+    },
+    "RentalState": {
+      "title": "Status Rental",
+      "description": "Status TV rental saat ini",
+      "type": "object",
+      "properties": {
+        "tvId": { "type": "string" },
+        "tvName": { "type": "string" },
+        "type": { "type": "string", "enum": ["PS4", "PS5"] },
+        "status": { "type": "string", "enum": ["tersedia", "aktif"] },
+        "startTime": { "type": "string", "format": "date-time" },
+        "pricePerHour": { "type": "number" }
+      },
+      "required": ["tvId", "status", "type"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "Daftar kasir dan admin"
+    },
+    "products": {
+      "schema": "Product",
+      "description": "Daftar produk warung"
+    },
+    "transactions": {
+      "schema": "Transaction",
+      "description": "Riwayat transaksi"
+    },
+    "finance": {
+      "schema": "Finance",
+      "description": "Catatan keuangan tambahan"
+    },
+    "rentals": {
+      "schema": "RentalState",
+      "description": "Status real-time TV rental"
+    }
+  }
+}
